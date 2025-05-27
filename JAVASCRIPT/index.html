@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Event Portal</title>
+    <script src="main.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .event-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        #event-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .event-card button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .event-card button:hover {
+            background-color: #0056b3;
+        }
+        #loading-spinner {
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Community Event Portal</h1>
+    <div>
+        <select id="category-filter">
+            <option value="All">All Categories</option>
+            <option value="Music">Music</option>
+            <option value="Art">Art</option>
+            <option value="Technology">Technology</option>
+        </select>
+        <input type="text" id="search-bar" placeholder="Search by name">
+    </div>
+    <div id="loading-spinner">Loading...</div>
+    <div id="event-container"></div>
+</body>
+</html>
+

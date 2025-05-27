@@ -1,0 +1,12 @@
+SELECT 
+    u.full_name AS User,
+    COUNT(DISTINCT r.event_id) AS EventsAttended,
+    COUNT(DISTINCT f.feedback_id) AS FeedbackSubmitted
+FROM 
+    Users u
+LEFT JOIN 
+    Registrations r ON u.user_id = r.user_id
+LEFT JOIN 
+    Feedback f ON u.user_id = f.user_id
+GROUP BY 
+    u.user_id;

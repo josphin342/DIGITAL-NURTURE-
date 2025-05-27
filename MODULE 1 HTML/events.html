@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        table.img {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        table.img caption {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        table.img td {
+            padding: 5px;
+            text-align: center;
+        }
+
+        table.img img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover; 
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+
+        table.img img:hover {
+            border-color: #007bff;
+            transform: scale(1.05); 
+            transition: transform 0.3s, border-color 0.3s;
+        }
+          video {
+            display: block;
+            margin: 20px auto;
+            max-width: 50%;
+        }
+         address {
+            font-style: normal;
+            line-height: 1.6;
+            text-align: center;
+        }
+        #contact{
+            text-align: center;
+            background-color: #f1f1f1;
+            margin-top: 20px;
+        }
+
+
+    </style>
+</head>
+     <table class="img"> 
+         <caption>Images from past Events</caption>
+                    <tr>
+                        <td><img src="Event1.jpg" alt ="Event-1" title=Event-1 class="img border"></td>
+                        <td><img src="Event2.jpg" alt ="Event-2" title=Event-2 class="img border"></td>
+                        <td><img src="Event3.jpg" alt ="Event-3" title=Event-3 class="img border"></td>
+                    </tr>
+                    <tr>
+                        <td><img src="Event4.jpg" alt ="Event-4" title=Event-4 class="img border"></td>
+                        <td><img src="Event5.jpg" alt ="Event-5" title=Event-5 class="img border"></td>
+                        <td><img src="Event6.jpg" alt ="Event-6" title=Event-6 class="img border"></td>
+                    </tr>
+     </table>
+     <!-- Video Section -->
+        <video id="promoVideo" controls oncanplay="videoReady()">
+        <source src="promo.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+       </video>
+    <p id="videoMessage"></p>
+     <section id="events">
+    <h2>Upcoming Events</h2>
+     <section id="events">
+    <h2>Upcoming Events</h2>
+    <ul>
+        <li>Community Concert - May 25, 2025</li>
+        <li>Art Workshop - June 10, 2025</li>
+        <li>Food Festival - July 15, 2025</li>
+    </ul>
+    
+</section>
+     <section id="contact">
+    <h2>Contact Us</h2>
+    <p>For inquiries, reach us at:</p>
+    <address>
+        <strong>Email:</strong> info@communityevents.com<br>
+        <strong>Phone:</strong> +1-800-123-4567<br>
+        <strong>Address:</strong> 123 Main Street, Anytown, USA
+    </address>
+</section>

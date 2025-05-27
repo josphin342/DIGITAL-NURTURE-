@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        form {
+            background-color: antiquewhite;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: inline-block;
+            width: 120px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        input, select, textarea {
+            width: calc(100% - 130px);
+            padding: 5px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            margin-left: 120px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        fieldset {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 500px;
+        }
+
+        .message {
+            color: green;
+            font-weight: bold;
+            margin-left: 120px;
+        }
+
+        .error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <!-- Registration Form -->
+    <fieldset>
+        <legend>Registration Form</legend>
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required placeholder="Enter your name" autofocus><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required placeholder="Enter your email"><br>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required><br>
+
+            <label for="eventType">Event Type:</label>
+            <select id="eventType" name="eventType" required>
+                <option value="concert">Concert</option>
+                <option value="workshop">Workshop</option>
+                <option value="food festival">Food festival</option>
+            </select><br>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" placeholder="Enter additional details"></textarea><br>
+
+            <button type="button" onclick="showConfirmation()">Submit</button>
+        </form>
+        <output id="confirmation"></output>
+    </fieldset>
+
+    <!-- Feedback Section -->
+    <fieldset>
+        <legend>Feedback Section</legend>
+        <form>
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" onblur="validatePhone()" placeholder="Enter your phone number">
+            <span id="phoneError" class="error-message"></span><br>
+
+            <label for="eventFee">Select Event Type:</label>
+            <select id="eventFee" name="eventFee" onchange="displayFee()">
+                <option value="50">Concert - $50</option>
+                <option value="30">Workshop - $30</option>
+                <option value="40">Food festival - $40</option>
+            </select>
+            <p id="feeDisplay"></p>
+
+            <label for="feedback">Feedback:</label>
+            <textarea id="feedback" onkeyup="countCharacters()" placeholder="Enter your feedback"></textarea>
+            <p>Characters typed: <span id="charCount">0</span></p>
+            <button type="button" onclick="submitFeedback()">Submit Feedback</button>
+            <p id="feedbackMessage" class="message"></p>
+        </form>
+    </fieldset>
+
+    <!-- Geolocation -->
+    <fieldset>
+        <legend>Geolocation</legend>
+        <button onclick="findNearbyEvents()">Find Nearby Events</button>
+        <p id="location"></p>
+    </fieldset>
+
+    <script>
+        
+    function showConfirmation() {
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const date = document.getElementById('date').value.trim();
+        const confirmation = document.getElementById('confirmation');
+
+        if (!name || !email || !date) {
+            confirmation.style.color = "red";
+            confirmation.textContent = "Please fill in all required fields: Name, Email, and Date of Birth.";
+        } else if (!validateEmail(email)) {
+            confirmation.style.color = "red";
+            confirmation.textContent = "Please enter a valid email address.";
+        } else {
+            confirmation.style.color = "green";
+            confirmation.textContent = `Thank you, ${name}! Your registration for ${date} is confirmed.`;
+        }
+    }
+
+    function validateEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+        function validatePhone() {
+            const phone = document.getElementById('phone').value;
+            const error = document.getElementById('phoneError');
+            if (!/^\d{10}$/.test(phone)) {
+                error.textContent = "Invalid phone number.";
+            } else {
+                error.textContent = "";
+            }
+        }
+
+        function displayFee() {
+            const fee = document.getElementById('eventFee').value;
+            document.getElementById('feeDisplay').textContent = `Event Fee: $${fee}`;
+        }
+
+        function countCharacters() {
+            const charCount = document.getElementById('feedback').value.length;
+            document.getElementById('charCount').textContent = charCount;
+        }
+
+        function submitFeedback() {
+            const feedback = document.getElementById('feedback').value.trim();
+            const feedbackMessage = document.getElementById('feedbackMessage');
+            if (feedback) {
+                feedbackMessage.textContent = "Thanks for your feedback!";
+                feedbackMessage.style.color = "green";
+            } else {
+                feedbackMessage.textContent = "Please enter feedback before submitting.";
+                feedbackMessage.style.color = "red";
+            }
+        }
+
+        function findNearbyEvents() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                        document.getElementById('location').textContent =
+                            `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`;
+                    },
+                    function () {
+                        document.getElementById('location').textContent = "Unable to retrieve location.";
+                    },
+                    { enableHighAccuracy: true, timeout: 5000 }
+                );
+            } else {
+                document.getElementById('location').textContent = "Geolocation is not supported by this browser.";
+            }
+        }
+    </script>
+</body>
+</html>
